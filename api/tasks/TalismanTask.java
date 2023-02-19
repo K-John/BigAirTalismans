@@ -22,7 +22,8 @@ public class TalismanTask implements Task {
 
     @Override
     public boolean validate() {
-        return !Vars.get().shouldPickupTalismans();
+        return Inventory.getCount(Constants.AIR_TALISMAN) < 10 &&
+                !Vars.get().shouldPickupTalismans();
     }
 
     @Override
