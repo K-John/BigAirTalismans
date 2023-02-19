@@ -23,6 +23,7 @@ public class PickupTask implements Task {
         Vars.get().setStatus("Picking up Air Talismans");
 
         Query.groundItems()
+                .inArea(Constants.DUKES_ROOM)
                 .idEquals(Constants.NOTED_AIR_TALISMAN, Constants.AIR_TALISMAN)
                 .findBestInteractable()
                 .map(talisman -> talisman.interact("Take"));
