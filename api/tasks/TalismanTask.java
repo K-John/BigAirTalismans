@@ -46,7 +46,7 @@ public class TalismanTask implements Task {
             Vars.get().setStatus("Dropping Air Talismans.");
 
             if (Inventory.drop(Constants.AIR_TALISMAN) > 0 ||
-                    Waiting.waitUntil(TribotRandom.uniform(200, 800), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
+                    Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
 
                 // This is our first dropped talisman, start the timer
                 if (Vars.get().getTalismansOnGroundSince() == null) {
@@ -63,7 +63,7 @@ public class TalismanTask implements Task {
             Vars.get().setStatus("Talking to Duke.");
 
             if (ChatScreen.handle(Constants.DUKE_DIALOGUE) &&
-                    Waiting.waitUntil(TribotRandom.uniform(200, 800), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
+                    Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
 
                 Vars.get().talismanCollected();
             }

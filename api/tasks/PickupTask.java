@@ -27,7 +27,7 @@ public class PickupTask implements Task {
 
         // Wait until we're done moving to click another
         if (MyPlayer.isMoving()) {
-            Waiting.waitUntil(TribotRandom.uniform(200, 800), () -> !MyPlayer.isMoving());
+            Waiting.waitUntil(TribotRandom.uniform(1200, 1800), () -> !MyPlayer.isMoving());
         }
 
         // Pick up Talisman
