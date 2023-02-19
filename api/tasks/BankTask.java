@@ -34,11 +34,8 @@ public class BankTask implements Task {
 
             Vars.get().setStatus("Walking to the bank.");
 
-            if (GlobalWalking.walkTo(Constants.BANK.getRandomTile()) &&
-                    Waiting.waitUntil(Constants.BANK::containsMyPlayer)) {
-
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!GlobalWalking.walkTo(Constants.BANK.getRandomTile()) ||
+                    !Waiting.waitUntil(Constants.BANK::containsMyPlayer)) {
                 return;
             }
         }
@@ -48,9 +45,8 @@ public class BankTask implements Task {
 
             Vars.get().setStatus("Opening the bank.");
 
-            if (Bank.open() && Waiting.waitUntil(Bank::isOpen)) {
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!Bank.open() ||
+                    !Waiting.waitUntil(Bank::isOpen)) {
                 return;
             }
         }
@@ -61,11 +57,8 @@ public class BankTask implements Task {
             Vars.get().setStatus("Depositing Air Talismans");
             Vars.get().setBankClearOfAirTalismans(false);
 
-            if (Bank.depositAll(Constants.AIR_TALISMAN) &&
-                    Waiting.waitUntil(TribotRandom.uniform(600, 1200), () -> !Inventory.contains(Constants.AIR_TALISMAN))) {
-
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!Bank.depositAll(Constants.AIR_TALISMAN) ||
+                    !Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> !Inventory.contains(Constants.AIR_TALISMAN))) {
                 return;
             }
         }
@@ -75,11 +68,8 @@ public class BankTask implements Task {
 
             Vars.get().setStatus("Setting the bank to noted withdrawal.");
 
-            if (BankSettings.setNoteEnabled(true) &&
-                    Waiting.waitUntil(BankSettings::isNoteEnabled)) {
-
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!BankSettings.setNoteEnabled(true) ||
+                    !Waiting.waitUntil(BankSettings::isNoteEnabled)) {
                 return;
             }
         }
@@ -90,11 +80,8 @@ public class BankTask implements Task {
             Vars.get().setStatus("Withdrawing noted Air Talismans.");
             Vars.get().setBankClearOfAirTalismans(false);
 
-            if (Bank.withdrawAll(Constants.AIR_TALISMAN) &&
-                    Waiting.waitUntil(TribotRandom.uniform(600, 1200), () -> !Bank.contains(Constants.AIR_TALISMAN))) {
-
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!Bank.withdrawAll(Constants.AIR_TALISMAN) ||
+                    !Waiting.waitUntil(TribotRandom.uniform(600, 1200), () -> !Bank.contains(Constants.AIR_TALISMAN))) {
                 return;
             }
         }

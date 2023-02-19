@@ -34,11 +34,8 @@ public class TalismanTask implements Task {
 
             Vars.get().setStatus("Walking to Duke's room.");
 
-            if (GlobalWalking.walkTo(Constants.DUKES_ROOM.getRandomTile()) &&
-                    Waiting.waitUntil(Constants.DUKES_ROOM::containsMyPlayer)) {
-
-                Waiting.waitNormal(600, 90);
-            } else {
+            if (!GlobalWalking.walkTo(Constants.DUKES_ROOM.getRandomTile()) ||
+                    !Waiting.waitUntil(Constants.DUKES_ROOM::containsMyPlayer)) {
                 return;
             }
         }
