@@ -24,7 +24,8 @@ public class TalismanTask implements Task {
     @Override
     public boolean validate() {
         return Inventory.getCount(Constants.AIR_TALISMAN) < 10 &&
-                !Talisman.shouldBePickedUp();
+                !Talisman.shouldBePickedUp() &&
+                (!ChatScreen.isOpen() || Inventory.contains(Constants.AIR_TALISMAN));
     }
 
     @Override
@@ -62,12 +63,6 @@ public class TalismanTask implements Task {
         if (talkToDuke() && Waiting.waitUntil(ChatScreen::isOpen)) {
 
             Vars.get().setStatus("Talking to Duke.");
-
-            if (ChatScreen.handle(Constants.DUKE_DIALOGUE) &&
-                    Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
-
-                Vars.get().talismanCollected();
-            }
         }
     }
 
