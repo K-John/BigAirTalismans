@@ -1,0 +1,32 @@
+package scripts.api.classes;
+
+import org.tribot.script.sdk.painting.Painting;
+import org.tribot.script.sdk.painting.template.basic.BasicPaintTemplate;
+import org.tribot.script.sdk.painting.template.basic.PaintLocation;
+import org.tribot.script.sdk.painting.template.basic.PaintRows;
+import org.tribot.script.sdk.painting.template.basic.PaintTextRow;
+import scripts.api.data.Vars;
+
+import java.awt.*;
+
+public class Paint {
+
+    public static void execute() {
+
+        PaintTextRow template = PaintTextRow.builder().background(Color.green.darker()).build();
+
+        BasicPaintTemplate paint = BasicPaintTemplate.builder()
+                .row(PaintRows.scriptName(template.toBuilder()))
+                .row(PaintRows.runtime(template.toBuilder()))
+                .row(template.toBuilder().label("Status").value(() -> Vars.get().getStatus()).build())
+                .row(template.toBuilder().label("Collected").value(() -> Vars.get().getCollectedCount()).build())
+                .row(template.toBuilder().label("Dropped").value(Talisman::droppedCount).build())
+                .row(template.toBuilder().label("Should Pickup").value(Talisman::shouldBePickedUp).build())
+                .row(template.toBuilder().label("Dropped For").value(Talisman::secondsDroppedFor).build())
+                .row(template.toBuilder().label("Bank is Clear").value(() -> Vars.get().isBankClear()).build())
+                .location(PaintLocation.TOP_RIGHT_VIEWPORT)
+                .build();
+
+        Painting.addPaint(paint::render);
+    }
+}
