@@ -25,7 +25,8 @@ public class TalismanTask implements Task {
     public boolean validate() {
         return Inventory.getCount(Constants.AIR_TALISMAN) < 10 &&
                 !Talisman.shouldBePickedUp() &&
-                (!ChatScreen.isOpen() || Inventory.contains(Constants.AIR_TALISMAN));
+                (!ChatScreen.isOpen() || Inventory.contains(Constants.AIR_TALISMAN)) &&
+                Vars.get().isBankClear();
     }
 
     @Override
