@@ -17,10 +17,10 @@ import java.time.Instant;
 @Getter
 public class Vars {
     private static final Vars instance = new Vars();
-    private final TaskSet tasks = new TaskSet(new BankTask(), new PickupTask(), new TalismanTask());
     private final TaskSet tasks = new TaskSet(new BankTask(), new DialogueTask(), new PickupTask(), new TalismanTask());
     private boolean isRunning = true;
     private String status = null;
+    private boolean bankClear = false;
     public static Vars get() {
         return instance;
     }
@@ -30,10 +30,9 @@ public class Vars {
     }
 
     // Talisman Specific
-    private boolean bankClearOfAirTalismans = false;
     private int talismansCollected = 0;
-    public void setBankClearOfAirTalismans(boolean bankClearOfAirTalismans) {
-        this.bankClearOfAirTalismans = bankClearOfAirTalismans;
+    public void setBankClear(boolean bankClear) {
+        this.bankClear = bankClear;
     }
     public void talismanCollected() {
         this.talismansCollected++;

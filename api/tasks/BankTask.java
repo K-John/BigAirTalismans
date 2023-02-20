@@ -16,15 +16,14 @@ public class BankTask implements Task {
 
     @Override
     public Priority priority() {
-        return Priority.MEDIUM;
+        return Priority.LOW;
     }
 
     @Override
     public boolean validate() {
-        // We have more than 10 talismans and we shouldn't be picking them up
         return (Inventory.getCount(Constants.AIR_TALISMAN) >= 10 && !Talisman.shouldBePickedUp()) ||
                 Inventory.isFull() ||
-                !Vars.get().isBankClearOfAirTalismans();
+                !Vars.get().isBankClear();
     }
 
     @Override
@@ -56,7 +55,7 @@ public class BankTask implements Task {
         if (Inventory.contains(Constants.AIR_TALISMAN)) {
 
             Vars.get().setStatus("Depositing Air Talismans");
-            Vars.get().setBankClearOfAirTalismans(false);
+            Vars.get().setBankClear(false);
 
             if (!Bank.depositAll(Constants.AIR_TALISMAN) ||
                     !Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> !Inventory.contains(Constants.AIR_TALISMAN))) {
@@ -79,7 +78,7 @@ public class BankTask implements Task {
         if (Bank.contains(Constants.AIR_TALISMAN)) {
 
             Vars.get().setStatus("Withdrawing noted Air Talismans.");
-            Vars.get().setBankClearOfAirTalismans(false);
+            Vars.get().setBankClear(false);
 
             if (!Bank.withdrawAll(Constants.AIR_TALISMAN) ||
                     !Waiting.waitUntil(TribotRandom.uniform(600, 1200), () -> !Bank.contains(Constants.AIR_TALISMAN))) {
@@ -87,7 +86,12 @@ public class BankTask implements Task {
             }
         }
 
+        // Set Starting Count
+        if (Vars.get().getStartingCount() == -1) {
+            Vars.get().setStartingCount(Inventory.getCount(Constants.NOTED_AIR_TALISMAN));
+        }
+
         // Bank doesn't contain Air Talismans
-        Vars.get().setBankClearOfAirTalismans(true);
+        Vars.get().setBankClear(true);
     }
 }
