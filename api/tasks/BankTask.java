@@ -85,13 +85,12 @@ public class BankTask implements Task {
                 return;
             }
         }
+        // Bank doesn't contain Air Talismans
+        Vars.get().setBankClear(true);
 
         // Set Starting Count
         if (Vars.get().getStartingCount() == -1) {
             Vars.get().setStartingCount(Inventory.getCount(Constants.NOTED_AIR_TALISMAN));
         }
-
-        // Bank doesn't contain Air Talismans
-        Vars.get().setBankClear(true);
     }
 }
