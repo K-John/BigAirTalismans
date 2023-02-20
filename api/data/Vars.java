@@ -27,7 +27,6 @@ public class Vars {
     }
 
     public void setStatus(String status) {
-        Log.info(status);
         this.status = status;
     }
 
