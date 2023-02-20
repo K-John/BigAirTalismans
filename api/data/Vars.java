@@ -77,6 +77,7 @@ public class Vars {
     }
     public int talismansOnGround() {
         return Query.groundItems()
+                .inArea(Constants.DUKES_ROOM)
                 .idEquals(Constants.AIR_TALISMAN)
                 .stream()
                 .mapToInt(GroundItem::getStack)
