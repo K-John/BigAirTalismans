@@ -8,6 +8,7 @@ import org.tribot.script.sdk.util.TribotRandom;
 import org.tribot.script.sdk.walking.GlobalWalking;
 import scripts.Task;
 import scripts.Priority;
+import scripts.api.classes.Talisman;
 import scripts.api.data.Constants;
 import scripts.api.data.Vars;
 
@@ -23,7 +24,7 @@ public class TalismanTask implements Task {
     @Override
     public boolean validate() {
         return Inventory.getCount(Constants.AIR_TALISMAN) < 10 &&
-                !Vars.get().shouldPickupTalismans();
+                !Talisman.shouldBePickedUp();
     }
 
     @Override
@@ -49,8 +50,8 @@ public class TalismanTask implements Task {
                     Waiting.waitUntil(TribotRandom.uniform(1800, 2400), () -> Inventory.contains(Constants.AIR_TALISMAN))) {
 
                 // This is our first dropped talisman, start the timer
-                if (Vars.get().getTalismansOnGroundSince() == null) {
-                    Vars.get().setTalismansOnGroundSince(Instant.now());
+                if (Talisman.timeDropped == null) {
+                    Talisman.timeDropped = Instant.now();
                 }
             } else {
                 return;

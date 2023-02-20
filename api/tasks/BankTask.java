@@ -8,6 +8,7 @@ import org.tribot.script.sdk.util.TribotRandom;
 import org.tribot.script.sdk.walking.GlobalWalking;
 import scripts.Task;
 import scripts.Priority;
+import scripts.api.classes.Talisman;
 import scripts.api.data.Constants;
 import scripts.api.data.Vars;
 
@@ -21,7 +22,7 @@ public class BankTask implements Task {
     @Override
     public boolean validate() {
         // We have more than 10 talismans and we shouldn't be picking them up
-        return (Inventory.getCount(Constants.AIR_TALISMAN) >= 10 && !Vars.get().shouldPickupTalismans()) ||
+        return (Inventory.getCount(Constants.AIR_TALISMAN) >= 10 && !Talisman.shouldBePickedUp()) ||
                 Inventory.isFull() ||
                 !Vars.get().isBankClearOfAirTalismans();
     }

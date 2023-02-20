@@ -10,6 +10,7 @@ import org.tribot.script.sdk.painting.template.basic.PaintRows;
 import org.tribot.script.sdk.painting.template.basic.PaintTextRow;
 import org.tribot.script.sdk.script.TribotScript;
 import org.tribot.script.sdk.script.TribotScriptManifest;
+import scripts.api.classes.Talisman;
 import scripts.api.data.Constants;
 import scripts.api.data.Vars;
 
@@ -39,6 +40,9 @@ public class BigAirTalismans implements TribotScript {
                 .row(template.toBuilder().label("On Ground").value(() -> Vars.get().talismansOnGround()).build())
                 .row(template.toBuilder().label("Should pickup").value(() -> Vars.get().shouldPickupTalismans()).build())
                 .row(template.toBuilder().label("On Ground Since").value(() -> Duration.between(Vars.get().getTalismansOnGroundSince(), Instant.now()).toSeconds()).build())
+                .row(template.toBuilder().label("Dropped").value(Talisman::droppedCount).build())
+                .row(template.toBuilder().label("Should Pickup").value(Talisman::shouldBePickedUp).build())
+                .row(template.toBuilder().label("Dropped For").value(Talisman::secondsDroppedFor).build())
                 .location(PaintLocation.TOP_RIGHT_VIEWPORT)
                 .build();
 

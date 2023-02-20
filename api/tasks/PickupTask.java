@@ -6,6 +6,7 @@ import org.tribot.script.sdk.query.Query;
 import org.tribot.script.sdk.util.TribotRandom;
 import scripts.Task;
 import scripts.Priority;
+import scripts.api.classes.Talisman;
 import scripts.api.data.Constants;
 import scripts.api.data.Vars;
 
@@ -18,7 +19,7 @@ public class PickupTask implements Task {
 
     @Override
     public boolean validate() {
-        return Vars.get().shouldPickupTalismans();
+        return Talisman.shouldBePickedUp();
     }
 
     @Override
