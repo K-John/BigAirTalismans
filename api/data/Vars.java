@@ -2,16 +2,12 @@ package scripts.api.data;
 
 import lombok.Getter;
 import org.tribot.script.sdk.Inventory;
-import org.tribot.script.sdk.Log;
 import scripts.TaskSet;
 import scripts.api.classes.Talisman;
 import scripts.api.tasks.DialogueTask;
 import scripts.api.tasks.TalismanTask;
 import scripts.api.tasks.BankTask;
 import scripts.api.tasks.PickupTask;
-
-import java.time.Duration;
-import java.time.Instant;
 
 @Getter
 public class Vars {
@@ -24,6 +20,10 @@ public class Vars {
 
     public static Vars get() {
         return instance;
+    }
+
+    public void stopRunning() {
+        this.isRunning = false;
     }
 
     public void setStatus(String status) {
