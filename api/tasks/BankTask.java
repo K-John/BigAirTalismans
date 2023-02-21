@@ -1,9 +1,6 @@
 package scripts.api.tasks;
 
-import org.tribot.script.sdk.Bank;
-import org.tribot.script.sdk.Waiting;
-import org.tribot.script.sdk.Inventory;
-import org.tribot.script.sdk.BankSettings;
+import org.tribot.script.sdk.*;
 import org.tribot.script.sdk.util.TribotRandom;
 import org.tribot.script.sdk.walking.GlobalWalking;
 import scripts.Task;
@@ -31,6 +28,12 @@ public class BankTask implements Task {
 
         // Walk to Bank
         if (!Constants.BANK.containsMyPlayer()) {
+
+            // Enable Run
+            if (!Options.isRunEnabled() &&
+                    MyPlayer.getRunEnergy() > TribotRandom.uniform(70, 100)) {
+                Options.setRunEnabled(true);
+            }
 
             Vars.get().setStatus("Walking to the bank.");
 

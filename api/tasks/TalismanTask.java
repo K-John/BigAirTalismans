@@ -1,8 +1,6 @@
 package scripts.api.tasks;
 
-import org.tribot.script.sdk.ChatScreen;
-import org.tribot.script.sdk.Inventory;
-import org.tribot.script.sdk.Waiting;
+import org.tribot.script.sdk.*;
 import org.tribot.script.sdk.query.Query;
 import org.tribot.script.sdk.util.TribotRandom;
 import org.tribot.script.sdk.walking.GlobalWalking;
@@ -34,6 +32,12 @@ public class TalismanTask implements Task {
 
         // Walk to Duke's Room
         if (!Constants.DUKES_ROOM.containsMyPlayer()) {
+
+            // Enable Run
+            if (!Options.isRunEnabled() &&
+                    MyPlayer.getRunEnergy() > TribotRandom.uniform(70, 100)) {
+                Options.setRunEnabled(true);
+            }
 
             Vars.get().setStatus("Walking to Duke's room.");
 
