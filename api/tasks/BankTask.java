@@ -63,19 +63,19 @@ public class BankTask implements Task {
             }
         }
 
-        // Turn on Noted setting
-        if (!BankSettings.isNoteEnabled()) {
-
-            Vars.get().setStatus("Setting the bank to noted withdrawal.");
-
-            if (!BankSettings.setNoteEnabled(true) ||
-                    !Waiting.waitUntil(BankSettings::isNoteEnabled)) {
-                return;
-            }
-        }
-
         // Withdraw Noted Air Talisman
         if (Bank.contains(Constants.AIR_TALISMAN)) {
+
+            // Turn on Noted setting
+            if (!BankSettings.isNoteEnabled()) {
+
+                Vars.get().setStatus("Setting the bank to noted withdrawal.");
+
+                if (!BankSettings.setNoteEnabled(true) ||
+                        !Waiting.waitUntil(BankSettings::isNoteEnabled)) {
+                    return;
+                }
+            }
 
             Vars.get().setStatus("Withdrawing noted Air Talismans.");
             Vars.get().setBankClear(false);
