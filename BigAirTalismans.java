@@ -17,7 +17,7 @@ public class BigAirTalismans implements TribotScript {
     public void execute(@NotNull final String args) {
 
         validate();
-
+        configure(args);
         Paint.execute();
 
         // Script Loop
@@ -41,6 +41,18 @@ public class BigAirTalismans implements TribotScript {
 
             Log.error("The Rune Mysteries Quest needs to be in progress for this script to work.");
             Vars.get().stopRunning();
+        }
+    }
+
+    public void configure(String args) {
+
+        String[] argArray = args.trim().split("\\s+");
+
+        for (String arg : argArray) {
+            switch(arg) {
+                case "debug":
+                    Vars.get().setDebug(true);
+            }
         }
     }
 }

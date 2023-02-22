@@ -5,7 +5,6 @@ import org.tribot.script.sdk.painting.template.basic.BasicPaintTemplate;
 import org.tribot.script.sdk.painting.template.basic.PaintLocation;
 import org.tribot.script.sdk.painting.template.basic.PaintRows;
 import org.tribot.script.sdk.painting.template.basic.PaintTextRow;
-import scripts.api.data.Constants;
 import scripts.api.data.Vars;
 
 import java.awt.*;
@@ -23,7 +22,7 @@ public class Paint {
                 .row(template.toBuilder().label("Collected").value(() -> Vars.get().getCollectedCount()).build());
 
         // Add Extra Information
-        if (Constants.DEBUG_MODE) {
+        if (Vars.get().isDebug()) {
 
             paintBuilder.row(template.toBuilder().label("Dropped Count").value(Talisman::droppedCount).build())
                     .row(template.toBuilder().label("Should Pickup").value(Talisman::shouldBePickedUp).build())

@@ -5,7 +5,6 @@ import org.tribot.script.sdk.types.WorldTile;
 
 public class Constants {
 
-    public static final boolean DEBUG_MODE = false;
     public static final int AIR_TALISMAN = 1438;
     public static final int NOTED_AIR_TALISMAN = 1439;
     public static final int DUKE = 815;

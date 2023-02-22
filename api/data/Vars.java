@@ -15,6 +15,7 @@ public class Vars {
     private final TaskSet tasks = new TaskSet(new BankTask(), new DialogueTask(), new PickupTask(), new TalismanTask());
     private boolean isRunning = true;
     private String status = null;
+    private boolean debug = false;
     private boolean bankClear = false;
     private int startingCount = -1;
 
@@ -28,6 +29,10 @@ public class Vars {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public void setBankClear(boolean bankClear) {
