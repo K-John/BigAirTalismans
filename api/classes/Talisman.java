@@ -3,6 +3,7 @@ package scripts.api.classes;
 import org.tribot.script.sdk.Inventory;
 import org.tribot.script.sdk.query.Query;
 import org.tribot.script.sdk.types.GroundItem;
+import org.tribot.script.sdk.util.TribotRandom;
 import scripts.api.data.Constants;
 
 import java.time.Duration;
@@ -51,9 +52,7 @@ public class Talisman {
             // Talismans have been on the ground for nearly 2 minutes or
             // There are 27 talismans on ground and in inventory
             if (droppedCount() + Inventory.getCount(Constants.AIR_TALISMAN) >= 27 ||
-                    (timeDropped != null &&
-                            Duration.between(timeDropped, Instant.now()).toSeconds() >= 110 &&
-                            droppedCount() > 0)) {
+                    (secondsDroppedFor() >= TribotRandom.uniform(100, 115) && droppedCount() > 0)) {
 
                 readyToBePickedUp = true;
                 timeDropped = null; // Reset timer since we're picking them up
